@@ -1,0 +1,63 @@
+.clients__section {
+  min-height: 103px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px 0 15px;
+  border-radius: 20px;
+  background: #ffffff;
+  overflow: hidden;
+
+  .clients__buttons {
+    display: flex;
+    margin: 0 -4px 0 -4px;
+    padding: 0 0 10px 0;
+
+    .clients__button {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 4px;
+      border: 1px solid transparent;
+      border-radius: 100%;
+      background: transparent;
+      user-select: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #E2EEFF;
+        border: 1px solid #E2EEFF;
+      }
+
+      &:focus {
+        background: #B5D3FF;
+        border: 1px solid #B5D3FF;
+      }
+    }
+  }
+
+  .clients__table {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 160px);
+    min-height: 103px;
+    margin: 0 -15px;
+
+    .clients__table-scroll {
+      flex: 1;
+      overflow: auto;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px; /* Ширина всего элемента навигации */
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent; /* Цвет дорожки */
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #D7E1ED; /* Цвет бегунка */
+      border-radius: 4px; /* Округление бегунка */
+    }
+  }
+}
