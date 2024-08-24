@@ -14,7 +14,42 @@
     </div>
     <div class="clients__table">
       <div class="clients__table-scroll">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="checkbox">
+            <th mat-header-cell *matHeaderCellDef>
+              <input type="checkbox">
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <input type="checkbox" value="{{element.checkbox}}">
+            </td>
+          </ng-container>
+          <!-- Position Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Имя </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
 
+          <!-- Name Column -->
+          <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef> Фамилия </th>
+            <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Телефон </th>
+            <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       </div>
     </div>
   </div>
