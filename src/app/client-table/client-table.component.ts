@@ -1,10 +1,9 @@
-import {Component, computed, signal, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
-import {MatCheckboxChange, MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
-import {MatPaginator} from "@angular/material/paginator";
-import {MatSort, MatSortModule} from "@angular/material/sort";
+import {MatSortModule} from "@angular/material/sort";
 import {SelectionModel} from "@angular/cdk/collections";
 import {Client} from "./interface/client";
 
