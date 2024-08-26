@@ -1,5 +1,5 @@
 .clients__section {
-  min-height: 103px;
+  min-height: 93px;
   display: flex;
   flex-direction: column;
   padding: 10px 15px 0 15px;
@@ -10,7 +10,7 @@
   .clients__buttons {
     display: flex;
     margin: 0 -4px 0 -4px;
-    padding: 0 0 10px 0;
+    padding: 0 0 3px 0;
 
     .clients__button {
       width: 35px;
@@ -35,13 +35,67 @@
         border: 1px solid #B5D3FF;
       }
     }
+
+    .add {
+      &::after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background-image: url("/assets/add-default-client.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
+
+    .add:disabled {
+      &:hover {
+        background: transparent;
+        border: 1px solid transparent;
+      }
+
+      &:focus {
+        background: transparent;
+        border: 1px solid transparent;
+      }
+
+      &::after {
+        background-image: url("/assets/add-disable-client.svg");
+      }
+    }
+
+    .delete {
+      &::after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background-image: url("/assets/delete-default-client.svg");
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
+
+    .delete:disabled {
+      &:hover {
+        background: transparent;
+        border: 1px solid transparent;
+      }
+
+      &:focus {
+        background: transparent;
+        border: 1px solid transparent;
+      }
+
+      &::after {
+        background-image: url("/assets/delete-disable-client.svg");
+      }
+    }
   }
 
   .clients__table {
     display: flex;
     flex-direction: column;
     max-height: calc(100vh - 192px);
-    min-height: 103px;
+    min-height: 47px;
     margin: 0 -15px;
 
     .clients__table-scroll {
