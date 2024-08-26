@@ -7,6 +7,7 @@
     <div class="clients__table">
       <div class="clients__table-scroll">
         <table mat-table [dataSource]="tableClient().clients" class="clients__mat-table">
+
           <ng-container matColumnDef="checkbox">
             <th mat-header-cell class="clients__mat-table-column-checkbox" *matHeaderCellDef>
               <mat-checkbox color="warn" class="clients__checkbox" [checked]="tableClient().completed" [indeterminate]="partiallyComplete()" (change)="update($event.checked)"></mat-checkbox>
@@ -15,25 +16,18 @@
               <mat-checkbox color="warn" class="clients__checkbox" [checked]="element.completed" (change)="update($event.checked, i)"></mat-checkbox>
             </td>
           </ng-container>
-          <!-- Position Column -->
           <ng-container matColumnDef="name">
             <th class="clients__mat-table-column-name" mat-header-cell *matHeaderCellDef> Имя </th>
             <td class="clients__mat-table-column-name" mat-cell *matCellDef="let element"> {{element.name}} </td>
           </ng-container>
-
-          <!-- Name Column -->
           <ng-container matColumnDef="surname">
             <th class="clients__mat-table-column-surname" mat-header-cell *matHeaderCellDef> Фамилия </th>
             <td class="clients__mat-table-column-surname" mat-cell *matCellDef="let element"> {{element.surname}} </td>
           </ng-container>
-
-          <!-- Weight Column -->
           <ng-container matColumnDef="email">
             <th class="clients__mat-table-column-email" mat-header-cell *matHeaderCellDef> E-mail </th>
             <td class="clients__mat-table-column-email" mat-cell *matCellDef="let element"> {{element.email}} </td>
           </ng-container>
-
-          <!-- Symbol Column -->
           <ng-container matColumnDef="phone">
             <th class="clients__mat-table-column-phone" mat-header-cell *matHeaderCellDef> Телефон </th>
             <td class="clients__mat-table-column-phone" mat-cell *matCellDef="let element"> {{element.phone}} </td>
