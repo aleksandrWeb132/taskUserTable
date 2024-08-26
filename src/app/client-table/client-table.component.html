@@ -2,22 +2,34 @@
   <div class="clients__section">
     <div class="clients__buttons">
       <button class="clients__button add"></button>
-      <button class="clients__button delete" [disabled]="checkLengthClient()"></button>
+      <button class="clients__button delete" [disabled]="isOneSelected()"></button>
     </div>
     <div class="clients__table">
       <div class="clients__table-scroll">
-        <table mat-table [dataSource]="tableClient().clients" class="clients__mat-table">
+        <table mat-table matSort [dataSource]="dataSource" class="clients__mat-table">
 
           <ng-container matColumnDef="checkbox">
             <th mat-header-cell class="clients__mat-table-column-checkbox" *matHeaderCellDef>
-              <mat-checkbox color="warn" class="clients__checkbox" [checked]="tableClient().completed" [indeterminate]="partiallyComplete()" (change)="update($event.checked)"></mat-checkbox>
+              <mat-checkbox
+                color="warn"
+                class="clients__checkbox"
+                (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()"
+              ></mat-checkbox>
             </th>
             <td mat-cell class="clients__mat-table-column-checkbox" *matCellDef="let element; let i = index">
-              <mat-checkbox color="warn" class="clients__checkbox" [checked]="element.completed" (change)="update($event.checked, i)"></mat-checkbox>
+              <mat-checkbox
+                color="warn"
+                class="clients__checkbox"
+                (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(element) : null"
+                [checked]="selection.isSelected(element)"
+              ></mat-checkbox>
             </td>
           </ng-container>
           <ng-container matColumnDef="name">
-            <th class="clients__mat-table-column-name" mat-header-cell *matHeaderCellDef> Имя </th>
+            <th class="clients__mat-table-column-name" *matHeaderCellDef mat-header-cell> Имя </th>
             <td class="clients__mat-table-column-name" mat-cell *matCellDef="let element"> {{element.name}} </td>
           </ng-container>
           <ng-container matColumnDef="surname">
@@ -33,8 +45,8 @@
             <td class="clients__mat-table-column-phone" mat-cell *matCellDef="let element"> {{element.phone}} </td>
           </ng-container>
 
-          <tr mat-header-row class="clients__table-header-row" *matHeaderRowDef="tableClient().columns"></tr>
-          <tr mat-row class="clients__table-body-row" *matRowDef="let row; columns: tableClient().columns; let i = index" [ngClass]="{active: tableClient().clients[i].completed}"></tr>
+          <tr mat-header-row class="clients__table-header-row" *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row class="clients__table-body-row" *matRowDef="let row; columns: displayedColumns;" [ngClass]="{active: checkSelectionActive(row.id)}"></tr>
         </table>
       </div>
     </div>
