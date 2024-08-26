@@ -6,16 +6,9 @@ import {FormsModule} from "@angular/forms";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, MatSortModule} from "@angular/material/sort";
 import {SelectionModel} from "@angular/cdk/collections";
+import {Client} from "./interface/client";
 
-export interface ClientElement {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  phone: string;
-}
-
-const CLIENTS: ClientElement[] = [
+const CLIENTS: Client[] = [
   {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
   {id: 1, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
   {id: 2, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
@@ -48,8 +41,8 @@ const CLIENTS: ClientElement[] = [
 export class ClientTableComponent {
   displayedColumns: string[] = ['checkbox', 'name', 'surname', 'email', 'phone'];
 
-  dataSource = new MatTableDataSource<ClientElement>(CLIENTS);
-  selection  = new SelectionModel<ClientElement>(true, []);
+  dataSource = new MatTableDataSource<Client>(CLIENTS);
+  selection  = new SelectionModel<Client>(true, []);
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
