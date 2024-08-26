@@ -49,7 +49,7 @@ export class ClientTableComponent {
       {completed: false, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
       {completed: false, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
       {completed: false, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-      {completed: false, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+      {completed: false, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'}
     ]
   });
 
@@ -72,5 +72,9 @@ export class ClientTableComponent {
       }
       return {...task};
     });
+  }
+
+  checkLengthClient() {
+    return this.tableClient().clients.length < 1;
   }
 }
