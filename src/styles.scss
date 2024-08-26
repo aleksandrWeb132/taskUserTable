@@ -85,6 +85,10 @@ body {
     border-bottom: 1px solid #f1f1f1;
   }
 
+  .clients__table-body-row.active {
+    background: #E9F0FF;
+  }
+
   .clients__mat-table-column-checkbox {
     width: 45px;
     height: 47px !important;

@@ -48,7 +48,7 @@
           </ng-container>
 
           <tr mat-header-row class="clients__table-header-row" *matHeaderRowDef="tableClient().columns"></tr>
-          <tr mat-row class="clients__table-body-row" *matRowDef="let row; columns: tableClient().columns;"></tr>
+          <tr mat-row class="clients__table-body-row" *matRowDef="let row; columns: tableClient().columns; let i = index" [ngClass]="{active: tableClient().clients[i].completed}"></tr>
         </table>
       </div>
     </div>
