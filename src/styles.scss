@@ -163,3 +163,51 @@ body {
     padding: 0 21px 0 6px !important;
   }
 }
+
+.button-blue {
+  width: 115px;
+  height: 53px;
+  border: none;
+  border-radius: 37px;
+  outline:none;
+  background: #2F67D5;
+  color: #ffffff;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+
+  &:hover {
+    background: #3C7CF8;
+  }
+
+  &:disabled {
+    background: #D8DEE9;
+  }
+
+  &:focus, &:active {
+    background: #194EB6;
+  }
+}
+
+.button-white {
+  width: 109px;
+  height: 53px;
+  border: none;
+  border-radius: 37px;
+  outline:none;
+  background: transparent;
+  color: #2F67D5;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+
+  &:hover {
+    background: rgb(60, 124, 248, 10%);
+  }
+
+  &:focus, &:active {
+    background: rgb(25, 78, 182, 20%);
+  }
+}
