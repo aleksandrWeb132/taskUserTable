@@ -6,6 +6,8 @@ import {FormsModule} from "@angular/forms";
 import {MatSortModule} from "@angular/material/sort";
 import {SelectionModel} from "@angular/cdk/collections";
 import {Client} from "./interface/client";
+import {MatButtonModule} from "@angular/material/button";
+import {PopupUpdateClientComponent} from "./popup-update-client/popup-update-client.component";
 
 const CLIENTS: Client[] = [
   {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
@@ -29,10 +31,26 @@ const CLIENTS: Client[] = [
   {id: 18, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'}
 ]
 
+export interface isVisible {
+  visible: boolean
+}
+
+export interface popupUpdate extends isVisible {
+  date: Client
+}
+
+export interface popupAdd extends isVisible {
+  date: Client | undefined
+}
+
+export interface popupDelete extends isVisible {
+  date: Client[] | undefined
+}
+
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCheckboxModule, FormsModule, MatSortModule],
+  imports: [CommonModule, MatTableModule, MatCheckboxModule, FormsModule, MatSortModule, MatButtonModule, PopupUpdateClientComponent, PopupUpdateClientComponent],
   templateUrl: './client-table.component.html',
   styleUrls: ['./client-table.component.scss']
 })
@@ -43,16 +61,41 @@ export class ClientTableComponent {
   dataSource = new MatTableDataSource<Client>(CLIENTS);
   selection  = new SelectionModel<Client>(true, []);
 
+  popupUpdateClient: popupUpdate = {
+    date: {id: 0, name: '', surname: "", email: '', phone: ''},
+    visible: false
+  }
+  popupAddClient: popupAdd       = {
+    date: undefined,
+    visible: false
+  }
+  popupDeleteClient: popupDelete = {
+    date: undefined,
+    visible: false
+  }
+
+  /** Проверяет все ли клиенту выбраны **/
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
 
     return numSelected === numRows;
   }
+  /** Проверяет есть ли хотябы 1 клиент выбраный **/
   isOneSelected() {
     return this.selection.selected.length === 0;
   }
+  /** Добавляет выбраных клиентов в отдельный массив или удаляет из этого массива всех **/
+  toggleAllRows() {
+    if(this.isAllSelected()) {
+      this.selection.clear();
 
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+  /** Проверяет есть ли у клиента активный checkbox **/
   checkSelectionActive(id: number) {
     let check = false;
 
@@ -65,13 +108,43 @@ export class ClientTableComponent {
     return check;
   }
 
-  toggleAllRows() {
-    if(this.isAllSelected()) {
-      this.selection.clear();
+  /** Управление Всплывающим окном обновления клиентов **/
+  openPopupUpdateClient(element: Client) {
+    this.popupUpdateClient.date = element;
 
-      return;
+    this.popupUpdateClient.visible = true;
+  }
+  closePopupUpdateClient(element: Client | undefined) {
+    if(element !== undefined) {
+      console.log(element);
     }
 
-    this.selection.select(...this.dataSource.data);
+    this.popupUpdateClient.visible = false;
+  }
+  /** Управление Всплывающим окном добавления клиентов **/
+  openPopupAddClient() {
+    this.popupAddClient.visible = true;
+  }
+  closePopupAddClient(element: Client | undefined) {
+    if(element !== undefined) {
+      console.log(element);
+    }
+
+    this.popupAddClient.visible = false;
+  }
+  /** Управление Всплывающим окном удаление клиентов **/
+  openPopupDeleteClient() {
+    if(this.isOneSelected()) {
+      this.popupDeleteClient.date = this.selection.selected;
+
+      this.popupDeleteClient.visible = true;
+    }
+  }
+  closePopupDeleteClient(element: Client[] | undefined) {
+    if(element !== undefined) {
+      console.log(element);
+    }
+
+    this.popupDeleteClient.visible = false;
   }
 }

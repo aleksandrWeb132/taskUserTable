@@ -30,7 +30,7 @@
           </ng-container>
           <ng-container matColumnDef="name">
             <th class="clients__mat-table-column-name" *matHeaderCellDef mat-header-cell> Имя </th>
-            <td class="clients__mat-table-column-name" mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td class="clients__mat-table-column-name" mat-cell *matCellDef="let element" (click)="openPopupUpdateClient(element)"> {{element.name}} </td>
           </ng-container>
           <ng-container matColumnDef="surname">
             <th class="clients__mat-table-column-surname" mat-header-cell *matHeaderCellDef> Фамилия </th>
@@ -51,4 +51,5 @@
       </div>
     </div>
   </div>
+  <app-popup-update-client [isVisible]="popupUpdateClient.visible" [data]="popupUpdateClient.date" (closeUpdateClient)="closePopupUpdateClient($event)"></app-popup-update-client>
 </div>
