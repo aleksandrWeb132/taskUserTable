@@ -2,7 +2,7 @@
   <div class="clients__section">
     <div class="clients__buttons">
       <button class="clients__button add"></button>
-      <button class="clients__button delete" [disabled]="isOneSelected()"></button>
+      <button class="clients__button delete" (click)="openPopupDeleteClient()" [disabled]="isOneSelected()"></button>
     </div>
     <div class="clients__table">
       <div class="clients__table-scroll">
@@ -52,4 +52,5 @@
     </div>
   </div>
   <app-popup-update-client [isVisible]="popupUpdateClient.visible" [data]="popupUpdateClient.date" (closeUpdateClient)="closePopupUpdateClient($event)"></app-popup-update-client>
+  <app-popup-delete-client [isVisible]="popupDeleteClient.visible" [data]="popupDeleteClient.date" (closeDeleteClient)="closePopupDeleteClient($event)"></app-popup-delete-client>
 </div>

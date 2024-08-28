@@ -8,6 +8,7 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {Client} from "./interface/client";
 import {MatButtonModule} from "@angular/material/button";
 import {PopupUpdateClientComponent} from "./popup-update-client/popup-update-client.component";
+import {PopupDeleteClientComponent} from "./popup-delete-client/popup-delete-client.component";
 
 const CLIENTS: Client[] = [
   {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
@@ -50,7 +51,7 @@ export interface popupDelete extends isVisible {
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCheckboxModule, FormsModule, MatSortModule, MatButtonModule, PopupUpdateClientComponent, PopupUpdateClientComponent],
+  imports: [CommonModule, MatTableModule, MatCheckboxModule, FormsModule, MatSortModule, MatButtonModule, PopupUpdateClientComponent, PopupUpdateClientComponent, PopupDeleteClientComponent],
   templateUrl: './client-table.component.html',
   styleUrls: ['./client-table.component.scss']
 })
@@ -134,7 +135,7 @@ export class ClientTableComponent {
   }
   /** Управление Всплывающим окном удаление клиентов **/
   openPopupDeleteClient() {
-    if(this.isOneSelected()) {
+    if(!this.isOneSelected()) {
       this.popupDeleteClient.date = this.selection.selected;
 
       this.popupDeleteClient.visible = true;
