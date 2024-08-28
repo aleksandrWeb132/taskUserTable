@@ -80,7 +80,12 @@ export class PopupAddClientComponent {
   }
 
   onClose(flag: number) {
+    let data = this.form.value;
 
-    this.closeAddClient.emit(undefined);
+    if(flag === 0) {
+      data = undefined;
+    }
+
+    this.closeAddClient.emit(data);
   }
 }
