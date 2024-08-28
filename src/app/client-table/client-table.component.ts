@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
@@ -10,6 +10,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {PopupUpdateClientComponent} from "./popup-update-client/popup-update-client.component";
 import {PopupDeleteClientComponent} from "./popup-delete-client/popup-delete-client.component";
 import {PopupAddClientComponent} from "./popup-add-client/popup-add-client.component";
+import {ClientsService} from "./clients.service";
 
 export interface isVisible {
   visible: boolean
@@ -35,30 +36,10 @@ export interface popupDelete extends isVisible {
   styleUrls: ['./client-table.component.scss']
 })
 
-export class ClientTableComponent {
+export class ClientTableComponent implements OnInit {
   displayedColumns: string[] = ['checkbox', 'name', 'surname', 'email', 'phone'];
 
-  clients: Client[] = [
-    {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 1, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 2, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
-    {id: 3, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 4, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 5, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 6, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 7, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 8, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 9, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 10, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 11, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 12, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
-    {id: 13, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 14, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 15, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 16, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 17, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-    {id: 18, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'}
-  ]
+  clients: Client[] = []
 
   dataSource = new MatTableDataSource<Client>(this.clients);
   selection  = new SelectionModel<Client>(true, []);
@@ -74,6 +55,34 @@ export class ClientTableComponent {
   popupDeleteClient: popupDelete = {
     date: undefined,
     visible: false
+  }
+
+  constructor(private clientsService: ClientsService) {}
+
+  ngOnInit() {
+    this.loadClients();
+  }
+
+  loadClients() {
+    if (this.clients.length === 0) {
+      this.clientsService.getClients().subscribe({
+        next: (data) => {
+          data.users.map((client, index) => {
+            this.clients.push({
+              id: index,
+              name: client.name,
+              surname: client.surname,
+              email: client.email,
+              phone: client.phone
+            });
+          });
+          this.dataSource.data = this.clients;
+        },
+        error: (error) => {
+          console.error('Ошибка при получении клиентов:', error);
+        }
+      });
+    }
   }
 
   /** Проверяет все ли клиенту выбраны **/
