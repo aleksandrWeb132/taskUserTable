@@ -3,6 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Client} from "./interface/client";
 
+export interface Users {
+  users: Client[]
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +15,7 @@ export class ClientsService {
 
   constructor(private http: HttpClient) {}
 
-  getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.apiUrl);
+  getClients(): Observable<Users> {
+    return this.http.get<Users>(this.apiUrl);
   }
 }
