@@ -9,6 +9,7 @@ import {Client} from "./interface/client";
 import {MatButtonModule} from "@angular/material/button";
 import {PopupUpdateClientComponent} from "./popup-update-client/popup-update-client.component";
 import {PopupDeleteClientComponent} from "./popup-delete-client/popup-delete-client.component";
+import {PopupAddClientComponent} from "./popup-add-client/popup-add-client.component";
 
 const CLIENTS: Client[] = [
   {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
@@ -51,7 +52,7 @@ export interface popupDelete extends isVisible {
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCheckboxModule, FormsModule, MatSortModule, MatButtonModule, PopupUpdateClientComponent, PopupUpdateClientComponent, PopupDeleteClientComponent],
+  imports: [CommonModule, MatTableModule, MatCheckboxModule, FormsModule, MatSortModule, MatButtonModule, PopupUpdateClientComponent, PopupUpdateClientComponent, PopupDeleteClientComponent, PopupAddClientComponent],
   templateUrl: './client-table.component.html',
   styleUrls: ['./client-table.component.scss']
 })
