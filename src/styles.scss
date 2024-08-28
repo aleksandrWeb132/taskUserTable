@@ -75,6 +75,10 @@ body {
     color: #2F4C97;
 
     border-bottom: 1px solid #f1f1f1;
+
+    .mat-sort-header-arrow {
+      display: none !important;
+    }
   }
 
   .clients__table-body-row {
