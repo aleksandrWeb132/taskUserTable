@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
-import {MatSortModule} from "@angular/material/sort";
+import {MatSort, MatSortModule} from "@angular/material/sort";
 import {SelectionModel} from "@angular/cdk/collections";
 import {Client} from "./interface/client";
 import {MatButtonModule} from "@angular/material/button";
@@ -36,7 +36,9 @@ export interface popupDelete extends isVisible {
   styleUrls: ['./client-table.component.scss']
 })
 
-export class ClientTableComponent implements OnInit {
+export class ClientTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort!: MatSort;
+
   displayedColumns: string[] = ['checkbox', 'name', 'surname', 'email', 'phone'];
 
   clients: Client[] = []
@@ -61,6 +63,10 @@ export class ClientTableComponent implements OnInit {
 
   ngOnInit() {
     this.loadClients();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   loadClients() {

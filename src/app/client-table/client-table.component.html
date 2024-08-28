@@ -29,19 +29,19 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="name">
-            <th class="clients__mat-table-column-name" *matHeaderCellDef mat-header-cell> Имя </th>
+            <th class="clients__mat-table-column-name" *matHeaderCellDef mat-header-cell mat-sort-header> Имя </th>
             <td class="clients__mat-table-column-name" mat-cell *matCellDef="let element" (click)="openPopupUpdateClient(element)"> {{element.name}} </td>
           </ng-container>
           <ng-container matColumnDef="surname">
-            <th class="clients__mat-table-column-surname" mat-header-cell *matHeaderCellDef> Фамилия </th>
+            <th class="clients__mat-table-column-surname" mat-header-cell *matHeaderCellDef mat-sort-header> Фамилия </th>
             <td class="clients__mat-table-column-surname" mat-cell *matCellDef="let element"> {{element.surname}} </td>
           </ng-container>
           <ng-container matColumnDef="email">
-            <th class="clients__mat-table-column-email" mat-header-cell *matHeaderCellDef> E-mail </th>
+            <th class="clients__mat-table-column-email" mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
             <td class="clients__mat-table-column-email" mat-cell *matCellDef="let element"> {{element.email}} </td>
           </ng-container>
           <ng-container matColumnDef="phone">
-            <th class="clients__mat-table-column-phone" mat-header-cell *matHeaderCellDef> Телефон </th>
+            <th class="clients__mat-table-column-phone" mat-header-cell *matHeaderCellDef mat-sort-header> Телефон </th>
             <td class="clients__mat-table-column-phone" mat-cell *matCellDef="let element"> {{element.phone}} </td>
           </ng-container>
 
