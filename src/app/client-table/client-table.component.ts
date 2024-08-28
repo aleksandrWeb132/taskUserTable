@@ -36,7 +36,7 @@ export interface isVisible {
 }
 
 export interface popupUpdate extends isVisible {
-  date: Client
+  date: Client | undefined
 }
 
 export interface popupAdd extends isVisible {
@@ -62,7 +62,7 @@ export class ClientTableComponent {
   selection  = new SelectionModel<Client>(true, []);
 
   popupUpdateClient: popupUpdate = {
-    date: {id: 0, name: '', surname: "", email: '', phone: ''},
+    date: undefined,
     visible: false
   }
   popupAddClient: popupAdd       = {
