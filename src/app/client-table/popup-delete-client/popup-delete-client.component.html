@@ -1,12 +1,12 @@
 <div class="popup-delete-client__modal" *ngIf="isVisible">
   <form class="popup-delete-client__content">
     <h2 class="popup-delete-client__title">Удаление строк</h2>
-    <div class="popup-delete-client__count-list">
+    <p class="popup-delete-client__count-list">
       Удалить выбранные строки ({{data?.length}})?
-    </div>
+    </p>
     <div class="popup-delete-client__buttons">
-      <button mat-button (click)="onClose(0)">Отмена</button>
-      <button mat-button (click)="onClose(1)">Удалить</button>
+      <button class="button-white" (click)="onClose(0)">Отмена</button>
+      <button class="button-blue" (click)="onClose(1)">Удалить</button>
     </div>
   </form>
 </div>

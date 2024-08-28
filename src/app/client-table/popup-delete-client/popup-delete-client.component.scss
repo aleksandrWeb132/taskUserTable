@@ -14,9 +14,34 @@
 .popup-delete-client__content {
   background: #ffffff;
   margin: 16px;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 40px;
+  border-radius: 20px;
   width: 100%;
-  max-width: 408px;
+  max-width: 368px;
   position: relative;
+
+  .popup-delete-client__title {
+    margin: 4px 0 0 0;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+    color: #231F20;
+  }
+  .popup-delete-client__count-list {
+    margin: 28px 0 89px 0;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.25px;
+  }
+
+  .popup-delete-client__buttons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    .button-white {
+      margin: 0 4px 0 0;
+    }
+  }
 }
