@@ -183,8 +183,6 @@ export class ClientTableComponent implements OnInit {
     if(index !== -1) {
       this.clients[index] = updatedClient;
 
-      console.log(this.clients[index]);
-
       this.dataSource.data = this.clients;
     }
   }
