@@ -11,28 +11,6 @@ import {PopupUpdateClientComponent} from "./popup-update-client/popup-update-cli
 import {PopupDeleteClientComponent} from "./popup-delete-client/popup-delete-client.component";
 import {PopupAddClientComponent} from "./popup-add-client/popup-add-client.component";
 
-const CLIENTS: Client[] = [
-  {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 1, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 2, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
-  {id: 3, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 4, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 5, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 6, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 7, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 8, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 9, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 10, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 11, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 12, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
-  {id: 13, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 14, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 15, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 16, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 17, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
-  {id: 18, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'}
-]
-
 export interface isVisible {
   visible: boolean
 }
@@ -60,7 +38,29 @@ export interface popupDelete extends isVisible {
 export class ClientTableComponent {
   displayedColumns: string[] = ['checkbox', 'name', 'surname', 'email', 'phone'];
 
-  dataSource = new MatTableDataSource<Client>(CLIENTS);
+  clients: Client[] = [
+    {id: 0, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 1, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 2, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
+    {id: 3, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 4, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 5, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 6, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 7, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 8, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 9, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 10, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 11, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 12, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: ''},
+    {id: 13, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 14, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 15, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 16, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 17, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'},
+    {id: 18, name: 'Александр', surname: "Прилучный", email: 'iohl_990@mail.ru', phone: '+79053856195'}
+  ]
+
+  dataSource = new MatTableDataSource<Client>(this.clients);
   selection  = new SelectionModel<Client>(true, []);
 
   popupUpdateClient: popupUpdate = {
@@ -118,7 +118,7 @@ export class ClientTableComponent {
   }
   closePopupUpdateClient(element: Client | undefined) {
     if(element !== undefined) {
-      console.log(element);
+      this.updateClient(element);
     }
 
     this.popupUpdateClient.visible = false;
@@ -148,5 +148,18 @@ export class ClientTableComponent {
     }
 
     this.popupDeleteClient.visible = false;
+  }
+
+
+  updateClient(updatedClient: Client) {
+    const index = this.clients.findIndex(client => client.id === updatedClient.id);
+
+    if (index !== -1) {
+      this.clients[index] = updatedClient;
+
+      console.log(this.clients[index]);
+
+      this.dataSource.data = this.clients;
+    }
   }
 }
