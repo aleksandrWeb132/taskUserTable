@@ -14,11 +14,34 @@
 .popup-update-client__content {
   background: #ffffff;
   margin: 16px;
-  padding: 20px;
-  border-radius: 5px;
+  padding: 40px;
+  border-radius: 20px;
   width: 100%;
-  max-width: 408px;
+  max-width: 368px;
   position: relative;
+
+  .popup-update-client__title {
+    margin: 4px 0 39px 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+  }
+
+  .popup-update-client__inputs {
+    margin-bottom: 8px;
+  }
+
+  .popup-update-client__buttons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    .button-white {
+      margin-right: 4px;
+    }
+  }
 }
 
 
