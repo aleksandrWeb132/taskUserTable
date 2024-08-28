@@ -96,7 +96,9 @@ export class PopupUpdateClientComponent implements OnChanges {
   }
 
   onClose(flag: number) {
-    let data = this.data;
+    let data = this.form.value;
+
+    data.id = this.data?.id;
 
     if(flag === 0) {
       data = undefined;
