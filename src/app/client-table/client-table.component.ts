@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormsModule} from "@angular/forms";
@@ -129,7 +129,7 @@ export class ClientTableComponent {
   }
   closePopupAddClient(element: Client | undefined) {
     if(element !== undefined) {
-      console.log(element);
+      this.addClient(element);
     }
 
     this.popupAddClient.visible = false;
@@ -144,17 +144,34 @@ export class ClientTableComponent {
   }
   closePopupDeleteClient(element: Client[] | undefined) {
     if(element !== undefined) {
-      console.log(element);
+      element.forEach(client => {
+        this.deleteClient(client);
+      });
     }
 
     this.popupDeleteClient.visible = false;
   }
 
+  addClient(addClient: Client) {
+    addClient.id = this.clients.length;
+
+    this.clients.push(addClient);
+
+    this.dataSource.data = this.clients;
+  }
+
+  deleteClient(deleteClient: Client) {
+    this.clients = this.clients.filter(client => client.id !== deleteClient.id);
+
+    this.selection.clear();
+
+    this.dataSource.data = this.clients;
+  }
 
   updateClient(updatedClient: Client) {
     const index = this.clients.findIndex(client => client.id === updatedClient.id);
 
-    if (index !== -1) {
+    if(index !== -1) {
       this.clients[index] = updatedClient;
 
       console.log(this.clients[index]);
