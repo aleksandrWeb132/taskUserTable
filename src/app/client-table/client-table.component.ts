@@ -11,6 +11,7 @@ import {PopupUpdateClientComponent} from "./popup-update-client/popup-update-cli
 import {PopupDeleteClientComponent} from "./popup-delete-client/popup-delete-client.component";
 import {PopupAddClientComponent} from "./popup-add-client/popup-add-client.component";
 import {ClientsService} from "./clients.service";
+import {LocalStorageService} from "./local-storage.service";
 
 export interface isVisible {
   visible: boolean
@@ -59,7 +60,17 @@ export class ClientTableComponent implements OnInit, AfterViewInit {
     visible: false
   }
 
-  constructor(private clientsService: ClientsService) {}
+  constructor(private clientsService: ClientsService, private localStorageService: LocalStorageService) {
+    let localStorage = this.loadAllData();
+
+    if(Object.keys(localStorage).length !== 0) {
+      Object.entries(localStorage).forEach(([key, value]) => {
+        this.clients.push(value);
+      });
+
+      this.dataSource.data = this.clients;
+    }
+  }
 
   ngOnInit() {
     this.loadClients();
@@ -70,17 +81,13 @@ export class ClientTableComponent implements OnInit, AfterViewInit {
   }
 
   loadClients() {
-    if (this.clients.length === 0) {
+    if(this.clients.length === 0) {
       this.clientsService.getClients().subscribe({
         next: (data) => {
           data.users.map((client, index) => {
-            this.clients.push({
-              id: index,
-              name: client.name,
-              surname: client.surname,
-              email: client.email,
-              phone: client.phone
-            });
+            this.clients.push({id: index, name: client.name, surname: client.surname, email: client.email, phone: client.phone});
+
+            this.saveData({id: index, name: client.name, surname: client.surname, email: client.email, phone: client.phone});
           });
           this.dataSource.data = this.clients;
         },
@@ -160,6 +167,7 @@ export class ClientTableComponent implements OnInit, AfterViewInit {
   closePopupDeleteClient(element: Client[] | undefined) {
     if(element !== undefined) {
       element.forEach(client => {
+        this.removeData('user' + client.id);
         this.deleteClient(client);
       });
     }
@@ -169,6 +177,8 @@ export class ClientTableComponent implements OnInit, AfterViewInit {
 
   addClient(addClient: Client) {
     addClient.id = this.clients.length;
+
+    this.saveData(addClient);
 
     this.clients.push(addClient);
 
@@ -187,9 +197,31 @@ export class ClientTableComponent implements OnInit, AfterViewInit {
     const index = this.clients.findIndex(client => client.id === updatedClient.id);
 
     if(index !== -1) {
+      this.updateData(updatedClient);
+
       this.clients[index] = updatedClient;
 
       this.dataSource.data = this.clients;
     }
+  }
+
+  // Пример сохранения данных
+  saveData(data: Client) {
+    this.localStorageService.setItem('user' + data.id, data);
+  }
+
+  // Пример обновления данных
+  updateData(data: Client) {
+    this.localStorageService.updateItem('user' + data.id, data);
+  }
+
+  // Пример чтения данных
+  loadAllData() {
+    return this.localStorageService.getAllItems();
+  }
+
+  // Пример удаления данных
+  removeData(id: string) {
+    this.localStorageService.removeItem(id);
   }
 }
