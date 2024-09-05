@@ -32,6 +32,11 @@
                 "type": "all",
                 "maximumWarning": "5kb",
                 "maximumError": "10kb"
+              },
+              {
+                "type": "initial",
+                "maximumWarning": "600kb",
+                "maximumError": "700kb"
               }
             ],
             "polyfills": [
